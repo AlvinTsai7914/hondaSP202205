@@ -1,0 +1,492 @@
+@mixin animateTurnCard {
+    animation-name: turnCard;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+@mixin animateDrawLine($o:left) {
+    animation-name: drawLine;
+    animation-duration: 1s;
+    animation-delay: 1.5s;
+    animation-fill-mode: both;
+    transform-origin: $o;
+}
+
+@mixin bingoFontStyle {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1;
+    font-family: "Poppins";
+    color: white;
+    @media (min-width: 577px) {
+        font-size: 120px;
+    }
+}
+
+.page_bingo .banner {
+    filter: drop-shadow(0px 0px 6px 1px rgba(0,0,0,0.7)) ;
+}
+
+.bingo {
+    width: 100%;
+    padding: 6px;
+    background-color: white;
+    margin-bottom: 30px;
+    position: relative;
+    @media (min-width: 769px) {
+        padding: 10px;
+    }
+    .bingo_line_box {
+        width: 100%;
+        height: 14px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 8;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .bingo_line {
+            width: 100%;
+            height: 14px;
+            border-radius: 7px;
+            background-color: #eeb934;
+            border-bottom: 4px solid #ed9337;
+            border-left: 2px solid #ed9337;
+        }
+        &.active {
+            display: flex;
+        }
+        &.horizontal_fst {
+            top: 16.6%;
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine;
+            }
+        }
+        &.horizontal_snd {
+            top: 50%;
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine;
+            }
+        }
+        &.horizontal_trd {
+            top: 83%;
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine;
+            }
+        }
+        &.vertical_fst {
+            left: 18%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine(right);
+            }
+        }
+        &.vertical_snd {
+            transform: translate(-50%, -50%) rotate(-90deg);
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine(right);
+            }
+        }
+        &.vertical_trd {
+            left: 83%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            .bingo_line {
+                width: 90%;
+                @include animateDrawLine(right);
+            }
+        }
+        &.left_top__right_bottom {
+            width: 110%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            .bingo_line {
+                width: 120%;
+                @include animateDrawLine();
+            }
+        }
+        &.right_top__left_bottom {
+            width: 110%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            .bingo_line {
+                width: 120%;
+                @include animateDrawLine(right);
+            }
+        }
+    }
+
+}
+
+.bingo_table__item {
+    position: relative;
+    padding-bottom: 33.3%;
+    border: 3px solid white;
+    // 正面
+    .num {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        transition: transform 1.5s ease;
+        backface-visibility: hidden;
+        background-color: $primary;
+        border-top: 4px solid #e5515f;
+        border-right: 4px solid #bd3943;
+        border-bottom: 4px solid #bd3943;
+        border-left:  4px solid #e5515f;
+        div {
+            @include bingoFontStyle;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    // 反面
+    .img_box {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: white;
+        div {
+            @include bingoFontStyle;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+            z-index: 1;
+            opacity: 0.7;
+        }
+        img {
+            width: 120%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+        }
+    }
+
+    // 成功上傳圖片的格子
+    &.active>div {
+        @include animateTurnCard;
+    }
+
+    @media (min-width: 769px) {
+        border: 4px solid white;
+        .num {
+            border-top: 6px solid #e5515f;
+            border-right: 6px solid #bd3943;
+            border-bottom: 6px solid #bd3943;
+            border-left:  6px solid #e5515f;
+        }
+    }
+}
+
+.rules {
+    color: #333333;
+    h2 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 15px;
+    } 
+    p {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .steps {
+        padding: 0 36px;
+        font-size: 20px;
+        font-weight: 500;
+        div {
+            position: relative;
+            border-radius: 18px;
+            background-color: white;
+            padding: 0px 10px 0px 120px;
+            margin-bottom: 15px;
+        }
+        .step_one::before {
+            content: "Step 1.";
+            position: absolute;
+            top: 0%;
+            left: 30px;
+        }
+        .step_two::before {
+            content: "Step 2.";
+            position: absolute;
+            top: 0px;
+            left: 30px;
+        }
+    }
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 28px;
+        } 
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .steps {
+            padding: 0 40px;
+            font-size: 16px;
+            line-height: 1.5;
+            div {
+                position: relative;
+                border-radius: 18px;
+                background-color: white;
+                padding: 6px 10px 6px 75px;
+                margin-bottom: 15px;
+            }
+            .step_one::before {
+                content: "Step 1.";
+                position: absolute;
+                top: 6px;
+                left: 10px;
+            }
+            .step_two::before {
+                content: "Step 2.";
+                position: absolute;
+                top: 6px;
+                left: 10px;
+            }
+        }
+    }
+    @media (max-width: 576px) {
+        .steps {
+            padding: 0 10px;
+        }
+    }
+}
+
+.result {
+    display: none;
+    &.active {
+        display: block;
+    }
+    h2 {
+        font-size: 40px;
+        margin: 0 auto 15px;
+        display: block;
+        width: fit-content;
+        span {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: relative;
+            top: 4px;
+            padding-left: 2px;
+            margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d63842;
+            color: white;
+
+        }
+        i {
+            font-size: 48px;
+        }
+    }
+    p {
+        font-size: 24px;
+        // font-weight: 500;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    // 完成遊戲
+    &.complete {
+        @mixin sharelinkStyle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            @media all and (max-width: 576px) {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+        .share_links {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 15px;
+            .download {
+                @include sharelinkStyle;
+                background: center / contain no-repeat url('../img/icon/download.png');
+            }
+            .line {
+                @include sharelinkStyle;
+                color: #06c755;
+                background: center / contain no-repeat url('../img/icon/line.png');
+                i {
+                    font-size: 93px;
+                }
+            }
+            .facebook {
+                @include sharelinkStyle;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    
+    }
+    @media all and (max-width: 768px) {
+        h2 {
+            font-size: 28px;
+            span {
+                width: 48px;
+                height: 48px;
+                padding-left: 1px;
+                margin-right: 10px;
+            }
+            i {
+                font-size: 36px;
+            }
+        }
+        p {
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+}
+
+.upload {
+    width: 100%;
+    height: 100%;
+    padding-top: 60%;
+    border-top: 1px solid #767676;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #d7d2c7;
+    z-index: 10;
+    transition: 0.5s ease;
+
+    &.active {
+        top: 0%;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    p {
+        width: fit-content;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        color: $primary;
+        display: block;
+        span {
+            font-size: 48px;
+            margin: 0 8px;
+        }
+    }
+
+    .btn {
+        display: block;
+        &.select {
+            width: 380px;
+            height: 96px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            background: center / 100% no-repeat url('../img/img_select_btn.png');
+            
+        }
+        &.submit {
+            width: 200px;
+            height: 62px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            background: center / 100% no-repeat url('../img/img_submit_btn.png');
+        }
+        @media all and (max-width: 768px) {
+            &.select {
+                width: 300px;
+                height: 82px;
+            }
+            &.submit {
+                width: 150px;
+            }
+        }
+        @media all and (max-width: 576px) {
+            &.select {
+                width: 270px;
+                height: 82px;
+            }
+
+        }
+    }
+
+    img {
+        max-width: 90%;
+    }
+
+    
+}
+.img_template {
+    position: fixed;
+    top: -10000%;
+
+    // z-index: 10000;
+}
+.spinner_wrapper {   
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255,255,255,0.6);
+    pointer-events: none;
+    &.active {
+        display: flex;
+    }
+}
+@keyframes turnCard {
+    0% {
+        transform:  translateY(0px) rotateY(0deg);
+    }
+    20% {
+        transform:  translateY(-20px) rotateY(0deg) scale(1.01);
+        box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
+    }
+    60% {
+        transform:  translateY(-20px) rotateY(180deg) scale(1.01);
+        box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
+    }
+    100% {
+        transform:  translateY(0px) rotateY(180deg) scale(1);
+    }
+}
+
+@keyframes drawLine {
+    0% {
+
+        transform: scaleX(0%);
+    }
+    100% {
+        transform: scaleX(100%);
+    }
+}

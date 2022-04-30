@@ -1,0 +1,333 @@
+/*---------------
+    How to use:
+  
+      @include center;
+  
+  ---------------*/
+
+@mixin size($w, $h: $w) {
+    width: $w;
+    height: $h;
+}
+
+@mixin dflexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+@mixin web-display {
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+@mixin mob-display {
+  @include media-breakpoint-up(lg) {
+    display: none;
+
+  }
+
+  @include media-breakpoint-down(md) {
+    display: block;
+  }
+}
+
+//自訂斷點
+@mixin media-min($size) {
+  @media screen and (min-width:$size) {
+    @content;
+  }
+}
+
+@mixin media-max($size){
+  @media screen and (max-width:$size) {
+    @content;
+  }
+}
+
+@mixin media-btween($max,$min){
+  @media screen and (max-width:$max) and (min-width:$min) {
+    @content;
+  }
+}
+
+
+// flex 排版
+@mixin Dflex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin Dflex-alignCenter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@mixin flex-column {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+@mixin flex-spaceBetween {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%padding-0 {
+  padding: 0;
+}
+
+
+// 置中
+@mixin center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin h-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin v-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin center-none {
+  position: relative;
+  left: auto;
+  top: auto;
+  bottom: auto;
+  right: auto;
+  transform: none;
+}
+
+// 陰影
+@mixin basic-shadow {
+  // box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+%basic-shadow {
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+// 漸變
+@mixin transition-cubic {
+  transition: all .4s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+%transition-cubic {
+  transition: all .4s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+// 框線粗細+顏色
+@mixin border-basic($size, $color) {
+  border: $size solid $color;
+}
+
+// 圓角
+@mixin border-radius($size) {
+  border-radius: $size;
+}
+
+//基本圓角設定：桌機10px, 手機5px
+@mixin border-basic-radius($size) {
+  border-radius: $size;
+
+  @include media-breakpoint-down(md) {
+    border-radius: $size/2;
+  }
+}
+
+//長寬
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+
+//radio button隱藏樣式
+%radio-btn-hide {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  @include size(100%, 100%);
+  left: 0;
+  top: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+// 區塊背景與文字顏色設定
+@mixin theme-colors($color) {
+
+  // 深底色樣式
+  @if($color==basic-theme) {
+    background: $primary-color;
+    color: $white;
+
+    &:hover {
+      background: $dark-primary-color;
+      // color: $white;
+    }
+  }
+
+  // 淺底色樣式
+  @else if($color==light-theme) {
+    background: $lighten-gray;
+    color: $main-gray;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  // 取消樣式
+  @else if($color==cancel) {
+    background: $light-gray;
+    color: $white;
+  }
+}
+
+// 文字溢出
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+%text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+
+@mixin fontAwe {
+  display: none;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+%fontAwe {
+  display: none;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+//icon背景圖與header footer背景圖
+%iconbg {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  border-radius: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@mixin create-heading-type-scale($scale) {
+
+  // Check the $scale value and store in a variable to be
+  // used when calculating the font sizes.
+  $the-heading-type-scale: check-type-scale-value($scale);
+
+  // Starting from h6, multiply each previous value by the scale
+  // to get the next font size
+  $font-size-h6: $font-size-base;
+  $font-size-h5: $font-size-h6 * $the-heading-type-scale;
+  $font-size-h4: $font-size-h5 * $the-heading-type-scale;
+  $font-size-h3: $font-size-h4 * $the-heading-type-scale;
+  $font-size-h2: $font-size-h3 * $the-heading-type-scale;
+  $font-size-h1: $font-size-h2 * $the-heading-type-scale;
+  // $font-size-display-base is made global to allow for accessing the
+  // varibale in the next mixin.
+  $font-size-display-base: $font-size-h1 !global;
+
+  // Add the created font sizes to the elements and classes
+  h1,
+  .h1 {
+    font-size: $font-size-h1;
+  }
+
+  h2,
+  .h2 {
+    font-size: $font-size-h2;
+  }
+
+  h3,
+  .h3 {
+    font-size: $font-size-h3;
+  }
+
+  h4,
+  .h4 {
+    font-size: $font-size-h4;
+  }
+
+  h5,
+  .h5 {
+    font-size: $font-size-h5;
+  }
+
+  h6,
+  .h6 {
+    font-size: $font-size-h6;
+  }
+
+  p,
+  .p {
+    font-size: $font-size-base * 0.9;
+  }
+}
+
+
+
+
+// @mixin transition-hover {
+//   transition: all .3s ease-out;
+// }
+
+// %transition-hover {
+//   transition: all .3s ease-out;
+// }
+
+
+// @mixin transition-easeout {
+//   transition: all .4s ease-in-out;
+// }
+
+// %transition-easeout {
+//   transition: all .4s ease-in-out;
+// }

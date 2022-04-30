@@ -1,0 +1,140 @@
+// bootstrap 變數
+// @import './variable';: #00d3be!default;
+$primary: #d83943!default; 
+$secondary: #ffd12f !default;
+$success: #ffd22c !default;
+$info: #369bfd !default;
+$warning: #ffd22c !default;
+$danger: #fd3635 !default;
+$light: #C4C4C4!default;
+$dark: #000000 !default;
+$primary-color: #00CCCC !important;
+$secondary-color: #ffd12f !important;
+
+// 蓋掉 bootstrap預設字體樣式
+$font-family-sans-serif:'Noto Sans TC','Roboto', sans-serif, Arial, "微軟正黑體", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// 蓋掉bootstrap應影
+$box-shadow:  0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+
+// 自定義變數
+// 灰色
+$main-gray: #494C52 !default;
+$light-gray: #A7A7BC!default;
+$lighten-gray: #E5E5E5 !default;
+$light-primary:#F6F6F6!default;
+$lighten-gray-2: rgba(73, 76, 82, 100%) !default;
+$lighten-gray-3: rgba(167, 167, 188, 100%) !default;
+$lighten-gray-3-70: rgba(167, 167, 188, 70%) !default;
+$lighten-gray-4: #A7A7BC !default;
+// $lighten-black: #272727 !default;
+// $light-black: #3b3b3b !default;
+
+
+
+/* 主色應用 */
+$primary-color-30: rgba(0, 204, 204, 0.3) !default;
+$primary-color-20: rgba(48, 214, 214, 0.2) !default;
+$primary-color-5: rgba(0, 204, 204, 0.1) !default;
+$dark-primary-color:#000000!important; 
+
+/* 輔色應用 */
+$secondary-color-30: rgba(255, 209, 47, 0.3) !important;
+$secondary-color-20: rgba(255, 209, 47, 0.2) !important;
+
+
+/*  boostrap 參數調整 */
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grid-breakpoints: map-merge(
+  (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1400px,
+    xxl:1400px //新增
+  ),
+  $grid-breakpoints
+);
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$container-max-widths: map-merge(
+  (
+    sm: 100%,
+    md: 960px,
+    lg: 960px,
+    xl: 1080px,
+    xxl: 1160px //新增
+  ),
+  $container-max-widths
+);
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+
+
+//----------文字優雅降級
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+//usage
+// .example-font-size {
+//     @include font-size(14px)
+// }
+
+$type-scales: (
+  minor-second: 1.067,
+  major-second: 1.125,
+  minor-third: 1.2,
+  major-third: 1.25,
+  perfect-fourth: 1.333,
+  augmented-fourth: 1.414,
+  perfect-fifth: 1.5,
+  golden-ratio: 1.618,
+);
+
+@function check-type-scale-value($scale) {
+  // Check $scale against the values in $type-scales.
+  @if map-has-key($type-scales, $scale) {
+    // If the value of $scale is defined in
+    // $type-scales, return the value of $scale.
+    @return map-get($type-scales, $scale);
+
+    // If the value of $scale is not defined in the
+    // $type-scales map, check if the value is a number
+    // and that the number is a unitless value.
+  } @else if type-of($scale) == number and unitless($scale) {
+    // If the value of $scale is a unitless number,
+    // return the number.
+    @return $scale;
+
+    // Lastly, should the value passed to $scale be neither
+    // found in the $type-scales map nor a unitless number,
+    // throw a Sass error to explain the issue.
+  } @else {
+    // Throw a Sass error if the $scale value is
+    // neither found in the $type-scales map nor
+    // a unitless number.
+    @error "Sorry, `#{$scale}` is not a unitless number value or a pre-defined key in the $type-scales map.";
+  }
+}

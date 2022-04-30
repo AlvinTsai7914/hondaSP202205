@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 取消 safari 電話連結 -->
+    <meta name="format-detection" content="telephone=no">
+
+    <title>好車停不停 | 登入頁</title>
+    <!-- favicon -->
+    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+
+</head>
+
+<body>
+
+    <!-- wrapper start -->
+    <div class="wrapper">
+        <!-- <div class="wrapper"> -->
+        <!-- header start -->
+        <header>
+            <a href="https://www.honda-taiwan.com.tw/Auto" class="logo" target="_blank">
+                <img src="img/header-logo.png" alt="">
+            </a>
+        </header>
+        <!-- header end -->
+
+        <!-- 主要內容 start -->
+        <main class="page_index">
+            <div class="banner">
+                <img src="img/index_banner.png" alt="" style="width: 100%">
+            </div>
+            <div class="container" >
+                <div class="tab_btns row">
+                    <div class="col-6">
+                        <div class="btn active" data-form="sign_in">
+                            <p>繼續玩</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="btn" data-form="sign_up">
+                            <p>新玩家註冊</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 登入 -->
+                <form class="sign_in active" method="POST">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">姓名</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword" disabled>
+                        </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">Email</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword1" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">電話</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword2" >
+                        </div>
+                    </div>
+                </form>
+                <!-- 註冊 -->
+                <form class="sign_up" method="POST">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">姓名</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword">
+                        </div>
+                        </div>
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">Email</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword1">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="inputPassword" class="col-3 col-sm-2 col-form-label">電話</label>
+                        <div class="col-9 col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword2" >
+                        </div>
+                    </div>
+                </form>
+                <div class="form_btn ">
+                    <div class="img_box">      
+                        <img src="img/car_right.svg" alt="">
+                    </div>      
+                    <button type="submit">送出</button>
+                    <a href="/bingo.html">送出</a>
+                </div>
+            </div>
+        </main>
+        <!-- 主要內容 end -->
+
+        <!-- footer start -->
+        <footer>
+        </footer>
+        <!-- footer end -->
+        
+
+    </div>
+    <!-- wrapper end -->
+
+    
+
+    <!-- jquery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- bootstrap -->
+    <script src="js/bootstrap-4.6.1.min.js"></script>
+    <!-- 共用js -->
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var FORM = "sign_in"
+        $(".tab_btns .btn").on("click", function(e) {
+            if ( !$(this).hasClass("active") ) {
+                $(".tab_btns .btn").toggleClass("active")
+                $("form").toggleClass("active")
+                FORM = $(this).attr("data-form")
+            }
+        })
+    </script>
+
+</body>
+
+</html>

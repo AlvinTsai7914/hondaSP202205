@@ -1,0 +1,15 @@
+// bootstrap 設定
+@import './bootstrap-4.6.1/functions.scss';
+@import './variable';
+@import './bootstrap-4.6.1/variables';
+@import './bootstrap-4.6.1/bootstrap.scss';
+
+// 基礎設定
+@import './custom-mixins';
+@import './global';
+@import './layout';
+
+// 首頁
+@import './index';
+@import './bingo';
+@import './prize';

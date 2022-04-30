@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+body {
+    background-color: #e3e3e3;
+}
+
+.wrapper {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0%;
+    background-color: white;
+    z-index: 100;
+
+    .logo {
+        max-width: 170px;
+        img {
+            width: 100%;
+        }
+    }
+    @media (max-width: 768px) {
+        height: 60px;
+        .logo {
+            max-width: 120px;
+        }
+    }
+}
+
+main {
+    position: relative;
+    margin: 0 auto;
+    background-color: #d7d2c7;
+    overflow: hidden;
+}
+
+.container {
+    padding: 0 130px 60px;
+    @media (max-width: 768px) {
+        padding: 0 30px 60px;
+    }
+}
+
+.banner {
+    z-index: 11;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.page_index .banner {
+    margin-bottom: 20px;
+}
+
+.page_bingo .banner {
+    margin-bottom: 40px;
+}
+
+.page_prize .banner {
+    margin-bottom: 40px;
+}

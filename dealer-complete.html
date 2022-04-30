@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 取消 safari 電話連結 -->
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- facebook share -->
+    <meta property="og:url"           content="https://www.ks-design.com.tw/" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+    
+    <title>好車停不停 | 遊戲頁</title>
+    <!-- favicon -->
+    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+    
+
+    </head>
+
+<body>
+
+    <!-- wrapper start -->
+    <div class="wrapper" id="capture">
+        <!-- header start -->
+        <header>
+            <a href="https://www.honda-taiwan.com.tw/Auto" class="logo" target="_blank">
+                <img src="img/header-logo.png" alt="">
+            </a>
+        </header>
+        <!-- header end -->
+        <!-- 主要內容 start -->
+        <main class="page_prize" style="padding-top: 60px; min-height: 100vh;">
+            
+            <div class="banner">
+                <img src="img/bingo_banner.png" alt="" style="width: 100%">
+            </div>
+
+            <div class="container">
+                <div class="general_prize" style="margin: 100px 0;">
+                    <h1>參與者姓名：王小明</h1>
+                    <h1 style="margin-bottom: 30px;">已登錄完成</h1>
+                    <h4 style="line-height: 1.8;">將於活動結束後抽出2名<br>
+                        <span style="color:#d83943; font-size: 38px;">1000小時</span><br>
+                        嘟嘟房停車券<br>
+                        中獎者將另行通知</h4>
+                </div>
+            </div>
+
+            <!-- 上傳照片 START -->
+            <div class="qrcode">
+                <div class="container">
+                    <h1>現場賞車活動後台系統</h1>
+                    <h2>Honda Cars營業人員專用</h2>
+                    <img src="https://fakeimg.pl/300/">
+                    <p>請服務人員掃QRCODE<br>
+                        協助參加者取得</p>
+                    <p class="red">抽1000小時停車券活動資格</p>
+                </div>
+            </div>
+            <!-- 上傳照片 END -->
+        </main>
+        <!-- 主要內容 end -->
+    </div>
+    <!-- wrapper end -->
+
+
+
+    <!-- jquery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- bootstrap -->
+    <script src="js/bootstrap-4.6.1.min.js"></script>
+    <!-- 共用js -->
+    <script src="js/common.js"></script>
+    <script>
+        $(".contact_btn").on("click", function() {
+            $(".qrcode").addClass("active")
+
+        })
+    </script>
+</body>
+
+</html>

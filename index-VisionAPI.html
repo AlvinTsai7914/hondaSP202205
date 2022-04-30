@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 取消 safari 電話連結 -->
+    <meta name="format-detection" content="telephone=no">
+
+    <title>好車停不停</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+    <!-- 20220309 首頁英文版樣式css -->
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="css/lang_en.css" /> -->
+</head>
+
+<body>
+
+    <!-- wrapper start -->
+    <div class="wrapper">
+        <!-- <div class="wrapper"> -->
+        <!-- header start -->
+        <header>
+        </header>
+        <!-- header end -->
+
+        <!-- 主要內容 start -->
+        <main>
+            <div class="container">
+                <input
+                    type="file"
+                    id="file-uploader"
+                    data-target="file-uploader"
+                    accept="image/*"
+                    multiple="multiple"
+                />
+                <button id="testAPI">測試</button>
+                <span></span>
+            </div>
+        </main>
+        <!-- 主要內容 end -->
+
+        <!-- footer start -->
+        <footer>
+        </footer>
+        <!-- footer end -->
+
+
+    </div>
+    <!-- wrapper end -->
+
+
+    <!-- jquery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+        // 方法一：先去google cloud設定vision api，取得api key，將圖片上傳至google cloud platform，並將圖片設定公開
+        $("#testAPI").on("click",function(){
+            //請求的內容
+            var suggest ={
+                "requests": [
+                    {
+                        "image": {
+                            "source": {
+                            "imageUri": "gs://cloud-samples-data/vision/demo-img.jpg"   //cloud的儲存位置
+                            }
+                        },
+                        "features": [
+                            {
+                                "type": "TEXT_DETECTION",
+                                "maxResults": "5"
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+
+            $.ajax({
+                type: 'POST',
+                url: "https://vision.googleapis.com/v1/images:annotate?key=a4e170ec75bfc73f4fe3dbdfea4192acdcf17de0",   //key後面帶vision api所給的金鑰
+                suggest:JSON.stringify(suggest),  //JSON格式
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",  
+                },
+                success: function(data, textStatus, jqXHR) {
+                    displayJSON(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('ERRORS: ' + textStatus + ' ' + errorThrown);
+                }
+            }).done(function(res) {
+                console.log("done")
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
