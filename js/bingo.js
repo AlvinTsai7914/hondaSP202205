@@ -507,8 +507,7 @@ $(function() {
         FB.ui(
             {
                 method: 'share',
-                href: 'https://211.21.155.101/SP_D/KSdemo/hondaSP202205/login.html',
-                
+                href: 'https://www.honda-taiwan.com.tw/SP/202205/', 
             },
             // callback
             function(response) {
