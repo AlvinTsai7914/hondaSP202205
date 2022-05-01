@@ -96,7 +96,8 @@ function initGame(board, oldStatus) {
             }
             if (check_topleft_to_bottomright === board) {
                 checkStatus.push(`x${1}`);   
-            } else if (check_topright_to_bottomleft === board) {
+            } 
+            if (check_topright_to_bottomleft === board) {
                 checkStatus.push(`x${2}`);
             }
             if (checkStatus) return checkStatus
@@ -118,7 +119,7 @@ function initGame(board, oldStatus) {
                         gameStatus[pushTarget]
                     );
                 }
-                console.log(arr);
+                // console.log(arr);
             }
         },
     };
@@ -210,11 +211,10 @@ $(function() {
         url: `${API_BASE_URL}/LoginMember`,
         type: "GET",
         success: function (res) {
-            console.log(res);
             memberId = res.data.memberId;
         },
         error: function (res) {
-            console.log(res);
+            // console.log(res);
         },
     }).then(function () {
         ajax({
@@ -224,7 +224,6 @@ $(function() {
                 memberId: `${memberId}`,
             },
             success: function (res) {
-                console.log(res.data);
                 let datas = res.data
                 // let datas = res.data.Jiugongge;
                 // let Completion = res.data.Completion;
@@ -253,10 +252,7 @@ $(function() {
                         gameStatus.push(0);
                     }
                 });
-                bingo = initGame(
-                    board,
-                    gameStatus
-                ); // 初始化遊戲
+                bingo = initGame(board, gameStatus); // 初始化遊戲
                 bingo.show(); //顯示遊戲
 
                 // 有照片的格子翻開
@@ -275,7 +271,7 @@ $(function() {
                 );
             },
             error: function (res) {
-                console.log(res);
+                // console.log(res);
             },
         });
     });
@@ -332,7 +328,6 @@ $(function() {
     };
     
     $("#crop_img").on("click", function() {
-        console.log("click")
         myCrop.croppie("result", {
             type: "canvas",
             format: type_img,
@@ -351,8 +346,8 @@ $(function() {
             data.append("photo", file);
             
             lastUploadImage = src
-            console.log(src)
-            // 上傳圖片
+            // console.log(src)
+            // ===== 上傳圖片API =====
             ajax({
                 url: `${API_BASE_URL}/UploadPhoto`,
                 type: "POST",
@@ -360,14 +355,13 @@ $(function() {
                 contentType: false, // 必須
                 processData: false, // 必須
                 success: function (res) {
-                    console.log(res)
+                    // console.log(res)
                     // 更新遊戲資料
                     let block = $(`[data-number=${selectedNumber}]`)
                     let ranking = $(block).attr("data-ranking")
                     switch(res.statusCode) {
-                        // 比對數字成功
+                        // ===== 比對數字成功 =====
                         case 0 :
-                            console.log("success")
                             // 更新遊戲內部資料
                             bingo.update(ranking)
                             bingo.show()
@@ -379,20 +373,33 @@ $(function() {
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
                             $(".result.succeed").addClass("active")
-                            console.log( $(block))
                             // 配對成功格子插入圖片並轉面
                             $(block).addClass("active").find("img").attr("src", `${lastUploadImage}`)
                             break;
 
-                        // 比對數字失敗
+                        // ===== 比對數字失敗 ===== 
                         case 5001 : 
-                            console.log("fail")
-                            // 下方資訊更新
+                            // // 下方資訊更新
+                            // $(".upload.active").removeClass("active")
+                            // $(".result.active").removeClass("active")
+                            // $(".rules").addClass("d-none")
+                            // $(".result.failed").addClass("active")
+
+                            // console.log("success")
+                            // 更新遊戲內部資料
+                            bingo.update(ranking)
+                            bingo.show()
+
+                            // 圖片上傳區塊隱藏
                             $(".upload.active").removeClass("active")
+                            
+                            // 下方資訊更新
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
-                            $(".result.failed").addClass("active")
-
+                            $(".result.succeed").addClass("active")
+                            // console.log( $(block))
+                            // 配對成功格子插入圖片並轉面
+                            $(block).addClass("active").find("img").attr("src", `${lastUploadImage}`)
                             break;
 
                         default :
@@ -403,7 +410,7 @@ $(function() {
             
                 },
                 error: function (res) {
-                    console.log(res);
+                    // console.log(res);
                 },
             }).then(function (res) {
                 $("body").removeClass("lock")
@@ -411,11 +418,12 @@ $(function() {
                 let checkStatus = bingo.check();
                 // 成功連線
                 if (checkStatus.length > 0) {
-                    console.log("complete")
+                    console.log(checkStatus)
                     $(".bingo").attr("style", "pointer-events: none;")
                     let bingoHtml = $(".bingo")
-                    let className = ""
+                   
                     for (let i=0; i<checkStatus.length; i++) {
+                        let className = ""
                         switch (checkStatus[i]) {
                             case "v0" :
                                 className = "vertical_fst active";
@@ -449,7 +457,6 @@ $(function() {
                                         </div>`
                         $(bingoHtml).append(lineHtml)
                     }
-                    console.log("appended")
                     // 下方資訊更新
                     $(".result").removeClass("active")
                     $(".rules").removeClass("active")
@@ -466,10 +473,8 @@ $(function() {
 
 // ==================== step3 監聽分享 ====================
 $(function() {
-
-
     $(".line").on("click", function() {
-        console.log("click")
+        // console.log("click")
         ajax({
             url: `${API_BASE_URL}/CompleteGame`,
             type: "POST",
@@ -477,16 +482,15 @@ $(function() {
                 memberId: `${memberId}`,
             },
             success: function (res) {
-                if (res.statusCode === 0) console.log(res)
-                // location.href=`${res.data}` 
+                if (res.statusCode === 0) location.href=`${res.data}` 
             },
             error: function (res) {
-                console.log(res);
+                // console.log(res);
             },
         })
     })
     $(".download").on("click", function() {
-        console.log("click")
+        // console.log("click")
         ajax({
             url: `${API_BASE_URL}/CompleteGame`,
             type: "POST",
@@ -494,12 +498,10 @@ $(function() {
                 memberId: `${memberId}`,
             },
             success: function (res) {
-                if (res.statusCode === 0) console.log(res)
-                // location.href=`${res.data}`
-         
+                if (res.statusCode === 0) location.href=`${res.data}`         
             },
             error: function (res) {
-                console.log(res);
+                // console.log(res);
             },
         })
     })  
@@ -511,7 +513,6 @@ $(function() {
             },
             // callback
             function(response) {
-                console.log(response)
                 if (response && !response.error_message) {
                     alert('Posting completed.');
                     ajax({
@@ -521,15 +522,14 @@ $(function() {
                             memberId: `${memberId}`,
                         },
                         success: function (res) {
-                            if (res.statusCode === 0) console.log(res)
-                            // location.href=`${res.data}`
+                            if (res.statusCode === 0) location.href=`${res.data}`
                         },
                         error: function (res) {
-                            console.log(res);
+                            // console.log(res);
                         },
                     })
                 } else {
-                    alert('Error while posting.');
+                    alert('分享失敗，請重新點選分享按鈕');
                 }
             }
         );  
