@@ -12446,6 +12446,12 @@ input::placeholder {
 body {
   background-color: #e3e3e3;
 }
+body.lock {
+  pointer-events: none;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
 
 .wrapper {
   position: relative;
@@ -13219,7 +13225,7 @@ form.sign_up .col-form-label {
 
 .img_template {
   position: fixed;
-  top: -10000%;
+  z-index: -1;
 }
 
 .spinner_wrapper {

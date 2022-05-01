@@ -3,6 +3,21 @@ var selectedNumber;
 var memberId;
 var bingo;
 var board = 3; //3*3的遊戲
+var lastUploadImage;
+
+// croppie 設定參數
+var width_crop = 1080, // 圖片裁切寬度 px 值
+    height_crop = 1350, // 圖片裁切高度 px 值
+    type_crop = "square", // 裁切形狀: square 為方形, circle 為圓形
+    width_preview = 1080, // 預覽區塊寬度 px 值
+    height_preview = 1350, // 預覽區塊高度 px 值
+    compress_ratio = 0.8, // 圖片壓縮比例 0~1
+    type_img = "jpeg", // 圖檔格式 jpeg png webp
+    oldImg = new Image(),
+    myCrop,
+    file,
+    oldImgDataUrl;
+
 
 // 遊戲設定
 function initGame(board, oldStatus) {
@@ -119,6 +134,32 @@ function ajax(options) {
             .fail(reject);
     });
 }
+// 讀取input檔案
+function readFile(input) {
+    if (input.files && input.files[0]){
+        file = input.files[0];
+    } else {
+        $("body").removeClass("lock")
+        alert("瀏覽器不支援此功能！建議使用最新版本 Chrome");
+        return;
+    }
+    
+    if (file.type.indexOf("image") == 0) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            oldImgDataUrl = e.target.result;
+            oldImg.src = oldImgDataUrl; // 載入 oldImg 取得圖片資訊
+            myCrop.croppie("bind", {
+                url: oldImgDataUrl
+            });
+        };
+        
+        reader.readAsDataURL(file);
+    } else {
+        $("body").removeClass("lock")
+        alert("您上傳的不是圖檔！");
+    }
+}
 // base64转blob
 const base64ToBlob = function(base64Data) {
     let arr = base64Data.split(','),
@@ -138,8 +179,23 @@ const base64ToBlob = function(base64Data) {
 const blobToFile = function(newBlob, fileName) {
     return new File([newBlob], fileName, { lastModified: new Date().getTime(), type: newBlob.type })
 };
- // ========== step1 讀取使用者資料/設定遊戲 ==========
-$(function () {
+
+// 開發時檢視圖片用(配合bingo.scss把.img_template的css刪掉才能看到)
+// function displayCropImg(src) {
+//     var html = "<img src='" + src + "' />";
+//     $("#newImg").html(html);
+// }
+// function displayNewImgInfo(src) {
+//     var html = "",
+//     filesize = src.length * 0.75;
+//     html += "<p>裁切圖片尺寸 " + width_crop + "x" + height_crop + "</p>";
+//     html += "<p>檔案大小約 " + Math.round(filesize / 1000) + "k</p>";
+//     $("#newImgInfo").html(html);
+// }
+
+
+// ==================== step1 讀取使用者資料/設定遊戲 ====================
+$(function() {
     function ajax(options) {
         return new Promise(function (
             resolve,
@@ -169,20 +225,27 @@ $(function () {
             },
             success: function (res) {
                 console.log(res.data);
-                let datas = res.data;
+                let datas = res.data
+                // let datas = res.data.Jiugongge;
+                // let Completion = res.data.Completion;
+                // if (res.data.Completion) {
+                //     location.href="/prize.html"
+                // }_
                 var gameStatus = [];
 
                 datas.forEach((data) => {
                     let Ranking = data.Ranking,
                         Id = data.Id,
                         Number = data.Number,
-                        PhotoFilePath =
-                            data.PhotoFilePath;
+                        PhotoFilePath = data.PhotoFilePath;
                     $(`[data-ranking=${Ranking}]`).attr("id", `${Id}`); //設定格子Id
                     $(`[data-ranking=${Ranking}]`).attr("data-number",`${Number}`); //設定格子Id
                     $(`[data-ranking=${Ranking}] .num div`).text(`${Number}`); //設定格子正面顯示的數字
                     $(`[data-ranking=${Ranking}] .img_box div`).text(`${Number}`); //設定格子反面顯示的數字
-                    $(`[data-ranking=${Ranking}] .img_box img`).attr("src",`${PhotoFilePath}`); //插入圖片
+                    if (PhotoFilePath !== "") {
+                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",`https://211.21.155.101/${PhotoFilePath}`); //插入圖片
+                    }
+                    
                     // 依照圖片設定遊戲狀態
                     if (PhotoFilePath !== "") {
                         gameStatus.push(1);
@@ -200,14 +263,7 @@ $(function () {
                 var n = 0;
                 $(".bingo_table__item").each(
                     function () {
-                        if (
-                            $(this)
-                                .find(
-                                    ".img_box img"
-                                )
-                                .attr("src") !==
-                            ""
-                        ) {
+                        if ($(this).find(".img_box img").attr("src") !=="") {
                             setTimeout(() => {
                                 $(this).addClass(
                                     "active"
@@ -225,22 +281,8 @@ $(function () {
     });
 });
 
-// ========== step2 使用者上傳圖片 ==========
-$(function () {
-    // croppie 設定
-    var width_crop = 1080, // 圖片裁切寬度 px 值
-        height_crop = 1080, // 圖片裁切高度 px 值
-        type_crop = "square", // 裁切形狀: square 為方形, circle 為圓形
-        width_preview = 350, // 預覽區塊寬度 px 值
-        height_preview = 350, // 預覽區塊高度 px 值
-        compress_ratio = 1, // 圖片壓縮比例 0~1
-        type_img = "jpeg", // 圖檔格式 jpeg png webp
-        oldImg = new Image(),
-        myCrop,
-        file,
-        oldImgDataUrl,
-        lastUploadImage;
-
+// ==================== step2 使用者上傳圖片 ====================
+$(function() {
     $(".bingo_table__item").on("click", function () {
         // $(".bingo").attr("style", "pointer-events: none;")
         // $(".btn.select").attr("style", "pointer-events: auto;")
@@ -251,40 +293,11 @@ $(function () {
         }
     });
     
-    function readFile(input) {
-        if (input.files && input.files[0]){
-            file = input.files[0];
-        } else {
-            alert("瀏覽器不支援此功能！建議使用最新版本 Chrome");
-            return;
-        }
-        
-        if (file.type.indexOf("image") == 0) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                console.log(input.files[0])
-                oldImgDataUrl = e.target.result;
-                oldImg.src = oldImgDataUrl; // 載入 oldImg 取得圖片資訊
-                myCrop.croppie("bind", {
-                    url: oldImgDataUrl
-                });
-            };
-            
-            reader.readAsDataURL(file);
-        } else {
-            alert("您上傳的不是圖檔！");
-        }
-    }
-    
-    function displayCropImg(src) {
-        var html = "<img src='" + src + "' />";
-        $("#newImg").html(html);
-    }
-    
-    $("#upload_img").on("change", function() {
-        console.log("change")
+    $("#upload_input").on("change", function() {
         $(".spinner_wrapper").addClass("active")
+        $("body").addClass("lock")
         $("#oldImg").croppie('destroy');
+
         // 裁切初始參數設定
         myCrop = $("#oldImg").croppie({
             viewport: { // 裁切區塊
@@ -295,32 +308,28 @@ $(function () {
             boundary: { // 預覽區塊
                 width: width_preview,
                 height: height_preview
-            }
+            },
+            enableZoom: false,
+            showZoomer: false
+
         });
         $("#oldImg").show();
         readFile(this);
-        $("#crop_img").trigger("click")
+        setTimeout(() => {
+            $("#crop_img").trigger("click")
+        }, 2000)
     });
     
     oldImg.onload = function() {
         var width = this.width,
         height = this.height,
-        fileSize = Math.round(file.size / 1000),
-        html = "";
+        fileSize = Math.round(file.size / 1000)
+        // html = "";
         
-        html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
-        html += "<p>檔案大小約 " + fileSize + "k</p>";
-        $("#oldImg").before(html);
+        // html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
+        // html += "<p>檔案大小約 " + fileSize + "k</p>";
+        // $("#oldImg").before(html);
     };
-    
-    // function displayNewImgInfo(src) {
-    //     var html = "",
-    //     filesize = src.length * 0.75;
-        
-    //     html += "<p>裁切圖片尺寸 " + width_crop + "x" + height_crop + "</p>";
-    //     html += "<p>檔案大小約 " + Math.round(filesize / 1000) + "k</p>";
-    //     $("#newImgInfo").html(html);
-    // }
     
     $("#crop_img").on("click", function() {
         console.log("click")
@@ -332,7 +341,7 @@ $(function () {
             // displayNewImgInfo(src)
             // displayCropImg(src)
             var data = new FormData();
-            // var file = $("#upload_img")[0].files[0]  //原檔測試用
+            // var file = $("#upload_input")[0].files[0]  //原檔測試用
 
             // 壓縮後轉檔
             var blob = base64ToBlob(src)    //Base64 > blob
@@ -342,7 +351,7 @@ $(function () {
             data.append("photo", file);
             
             lastUploadImage = src
-        
+            console.log(src)
             // 上傳圖片
             ajax({
                 url: `${API_BASE_URL}/UploadPhoto`,
@@ -370,46 +379,34 @@ $(function () {
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
                             $(".result.succeed").addClass("active")
-
+                            console.log( $(block))
                             // 配對成功格子插入圖片並轉面
-                            $(block).attr("src", `${lastUploadImage}`).addClass("active")
+                            $(block).addClass("active").find("img").attr("src", `${lastUploadImage}`)
                             break;
 
                         // 比對數字失敗
                         case 5001 : 
-                            // console.log("fail")
-                            // // 下方資訊更新
-                            // $(".upload.active").removeClass("active")
-                            // $(".result.active").removeClass("active")
-                            // $(".rules").addClass("d-none")
-                            // $(".result.failed").addClass("active")
-
-                            console.log("success")
-                            // 更新遊戲內部資料
-                            bingo.update(ranking)
-                            bingo.show()
-
-                            // 圖片上傳區塊隱藏
-                            $(".upload.active").removeClass("active")
-                            
+                            console.log("fail")
                             // 下方資訊更新
+                            $(".upload.active").removeClass("active")
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
-                            $(".result.succeed").addClass("active")
+                            $(".result.failed").addClass("active")
 
-                            // 配對成功格子插入圖片並轉面
-                            console.log()
-                            $(block).addClass("active")
                             break;
 
                         default :
+                            $(".spinner_wrapper").removeClass("active")
+                            $("#upload_input").val("")
                             break;
                     }
+            
                 },
                 error: function (res) {
                     console.log(res);
                 },
             }).then(function (res) {
+                $("body").removeClass("lock")
                 $(".spinner_wrapper").removeClass("active")
                 let checkStatus = bingo.check();
                 // 成功連線
@@ -419,7 +416,6 @@ $(function () {
                     let bingoHtml = $(".bingo")
                     let className = ""
                     for (let i=0; i<checkStatus.length; i++) {
-                        console.log(i)
                         switch (checkStatus[i]) {
                             case "v0" :
                                 className = "vertical_fst active";
@@ -460,10 +456,68 @@ $(function () {
                     $(".result.complete").addClass("active")
                     
                 } 
-                $("#upload_img").val("")
+                // 清空input(必要，避免上同張圖無法觸發onChange事件)
+                $("#upload_input").val("")
             });
-
         });
    
     });
 });
+
+// ==================== step3 監聽分享 ====================
+$(function() {
+
+
+    $(".line").on("click", function() {
+        console.log("click")
+        ajax({
+            url: `${API_BASE_URL}/CompleteGame`,
+            type: "POST",
+            data: {
+                memberId: `${memberId}`,
+            },
+            success: function (res) {
+                if (res.statusCode === 0) console.log(res)
+                // location.href=`${res.data}` 
+            },
+            error: function (res) {
+                console.log(res);
+            },
+        })
+    })
+    $(".download").on("click", function() {
+        console.log("click")
+        ajax({
+            url: `${API_BASE_URL}/CompleteGame`,
+            type: "POST",
+            data: {
+                memberId: `${memberId}`,
+            },
+            success: function (res) {
+                if (res.statusCode === 0) console.log(res)
+                // location.href=`${res.data}`
+         
+            },
+            error: function (res) {
+                console.log(res);
+            },
+        })
+    })  
+    $(".facebook").on("click", function() {
+        FB.ui(
+            {
+                method: 'share',
+                href: 'https://developers.facebook.com/docs/',
+            },
+            // callback
+            function(response) {
+                console.log(response)
+                if (response && !response.error_message) {
+                alert('Posting completed.');
+                } else {
+                alert('Error while posting.');
+                }
+            }
+        );  
+    })
+})

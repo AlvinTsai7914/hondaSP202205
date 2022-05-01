@@ -11,7 +11,7 @@
     <meta name="format-detection" content="telephone=no">
     
     <!-- facebook share -->
-    <meta property="og:url"           content="https://www.ks-design.com.tw/" />
+    <meta property="og:url"           content="https://www.honda-taiwan.com.tw/SP/202205/" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta property="og:description"   content="Your description" />
@@ -29,17 +29,19 @@
 
     </head>
 
-<body>
-    <div id="fb-root"></div>
+<body class="">
     <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : '3315279582094141',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v13.0'
+          });
+        };
     </script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v13.0&appId=268882418712218&autoLogAppEvents=1" nonce="OLfzCnJi"></script>
     <!-- wrapper start -->
     <div class="wrapper" id="capture">
         <!-- header start -->
@@ -72,7 +74,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item" data-ranking="2" data-number>
@@ -81,7 +83,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item" data-ranking="3" data-number>
@@ -100,7 +102,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item"  data-ranking="5" data-number>
@@ -109,7 +111,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item"  data-ranking="6" data-number>
@@ -118,7 +120,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/"  >
+                                <img src=""  >
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item" data-ranking="7" data-number>
@@ -127,7 +129,7 @@
                             </div>
                             <div class="img_box">
                                 <div></div>
-                                <img src="https://fakeimg.pl/300/">
+                                <img src="">
                             </div>
                         </div>
                         <div class="col-4 bingo_table__item" data-ranking="8" data-number>
@@ -187,32 +189,35 @@
                 </div>
 
                 <!-- 完成遊戲 -->
-                <div class="result complete">
+                <div class="result complete active">
                     <h2>挑戰成功！</h2>
                     <p>完成Honda停車九宮格的你是最棒的！<br>
                         趕快向好友分享就可以獲得<br>
                         全台嘟嘟房 1hr 停車券哦！</p>
                     <div class="share_links">
-                        <div class="download" href="">
-                        </div>
-                        <a class="line" href="https://social-plugins.line.me/lineit/share?url=">
-                        </a>
+                        <a class="download" href="/img/share.png" download="share.png" download></a>
+                        <!-- <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-env="REAL" data-url="https://www.honda-taiwan.com.tw/SP/202205/" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div> -->
+                        <!-- <div class="line line-it-button" data-lang="zh_Hant" data-type="share-c" data-env="REAL" data-url="https://www.honda-taiwan.com.tw/SP/202205/" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div> -->
+                        <a class="line" href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent("https://www.honda-taiwan.com.tw/SP/202205/")) ));' title='分享給 LINE 好友'></a>
                         <div class="facebook">
                             <img src="img/icon/facebook.png" alt="">
                         </div>
+                        <div class="fb-share-button" data-href="https://www.honda-taiwan.com.tw/SP/202205/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.honda-taiwan.com.tw%2FSP%2F202205%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
+                                                
                     </div>
                 </div>
             </div>
 
             <!-- 上傳照片 START -->
             <div class="upload">
-                <div class="container" action="" method="post">
+                <div class="container" >
                     <p>你已選取<span class="selected_number">9</span>號</p>
-                    <form enctype="multipart/form-data">
-                        <label class="btn select" id="upload_label"><input id="upload_img" style="display:none;" type="file" accept="image/*"></label>
-                    </form>
+                    <!-- <form enctype="multipart/form-data"> -->
+                        <label class="btn select" id="upload_label"><input id="upload_input" style="display:none;" type="file" accept="image/*"></label>
+                    <!-- </form> -->
                     <button id="crop_img" style="opacity: 0;">123</button>
                     <img src="https://fakeimg.pl/300/">
+                    <button class="upload_close"><i class="fa-solid fa-angle-down"></i></button>
                 </div>
             </div>
             <!-- 上傳照片 END -->
@@ -245,13 +250,27 @@
     <script  type="module" src="js/bingo.js"></script>
     <script>
         $(function () {
-            // 臉書分享功能
-            $(".share_links .facebook").on("click", function() {
-                FB.ui({
-                    method: 'share',
-                    href: 'https://www.ks-design.com.tw/',
-                }, function(response){});
-            })           
+
+            $(".banner").on("click", function() {
+                $(".upload").removeClass("active")
+            })
+            $(".facebook").on("click", function() {
+                FB.ui(
+                    {
+                        method: 'share',
+                        href: 'https://developers.facebook.com/docs/',
+                    },
+                    // callback
+                    function(response) {
+                        console.log(response)
+                        if (response && !response.error_message) {
+                        alert('Posting completed.');
+                        } else {
+                        alert('Error while posting.');
+                        }
+                    }
+                );  
+            })
         });
 
        
