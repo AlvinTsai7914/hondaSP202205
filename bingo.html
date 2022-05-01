@@ -254,23 +254,6 @@
             $(".banner").on("click", function() {
                 $(".upload").removeClass("active")
             })
-            $(".facebook").on("click", function() {
-                FB.ui(
-                    {
-                        method: 'share',
-                        href: 'https://developers.facebook.com/docs/',
-                    },
-                    // callback
-                    function(response) {
-                        console.log(response)
-                        if (response && !response.error_message) {
-                        alert('Posting completed.');
-                        } else {
-                        alert('Error while posting.');
-                        }
-                    }
-                );  
-            })
         });
 
        

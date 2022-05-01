@@ -507,15 +507,29 @@ $(function() {
         FB.ui(
             {
                 method: 'share',
-                href: 'https://developers.facebook.com/docs/',
+                href: 'https://www.honda-taiwan.com.tw/SP/202205/',
             },
             // callback
             function(response) {
                 console.log(response)
                 if (response && !response.error_message) {
-                alert('Posting completed.');
+                    alert('Posting completed.');
+                    ajax({
+                        url: `${API_BASE_URL}/CompleteGame`,
+                        type: "POST",
+                        data: {
+                            memberId: `${memberId}`,
+                        },
+                        success: function (res) {
+                            if (res.statusCode === 0) console.log(res)
+                            // location.href=`${res.data}`
+                        },
+                        error: function (res) {
+                            console.log(res);
+                        },
+                    })
                 } else {
-                alert('Error while posting.');
+                    alert('Error while posting.');
                 }
             }
         );  
