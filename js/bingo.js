@@ -379,27 +379,12 @@ $(function() {
 
                         // ===== 比對數字失敗 ===== 
                         case 5001 : 
-                            // // 下方資訊更新
-                            // $(".upload.active").removeClass("active")
-                            // $(".result.active").removeClass("active")
-                            // $(".rules").addClass("d-none")
-                            // $(".result.failed").addClass("active")
-
-                            // console.log("success")
-                            // 更新遊戲內部資料
-                            bingo.update(ranking)
-                            bingo.show()
-
-                            // 圖片上傳區塊隱藏
-                            $(".upload.active").removeClass("active")
-                            
                             // 下方資訊更新
+                            $(".upload.active").removeClass("active")
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
-                            $(".result.succeed").addClass("active")
-                            // console.log( $(block))
-                            // 配對成功格子插入圖片並轉面
-                            $(block).addClass("active").find("img").attr("src", `${lastUploadImage}`)
+                            $(".result.failed").addClass("active")
+                         
                             break;
 
                         default :
