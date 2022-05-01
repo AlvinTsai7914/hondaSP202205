@@ -507,7 +507,8 @@ $(function() {
         FB.ui(
             {
                 method: 'share',
-                href: 'https://211.21.155.101/SP_D/KSdemo/hondaSP202205/bingo.html',
+                href: 'https://211.21.155.101/SP_D/KSdemo/hondaSP202205/login.html',
+                
             },
             // callback
             function(response) {
