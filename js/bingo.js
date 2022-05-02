@@ -180,7 +180,58 @@ const base64ToBlob = function(base64Data) {
 const blobToFile = function(newBlob, fileName) {
     return new File([newBlob], fileName, { lastModified: new Date().getTime(), type: newBlob.type })
 };
-
+// 遊戲成功判斷 + 畫線
+function checkAndDraw() {
+    let checkStatus = bingo.check();
+    // 成功連線
+    if (checkStatus.length > 0) {
+        console.log(checkStatus)
+        $(".bingo").attr("style", "pointer-events: none;")
+        let bingoHtml = $(".bingo")
+       
+        for (let i=0; i<checkStatus.length; i++) {
+            let className = ""
+            switch (checkStatus[i]) {
+                case "v0" :
+                    className = "vertical_fst active";
+                    break;
+                case "v1" :
+                    className = "vertical_snd active";
+                    break;
+                case "v2" :
+                    className = "vertical_trd active";
+                    break;
+                case "h0" :
+                    className = "horizontal_fst active";
+                    break;
+                case "h1" :
+                    className = "horizontal_snd active";
+                    break;
+                case "h2" :
+                    className = "horizontal_trd active";
+                    break;
+                case "x1" :
+                    className = "left_top__right_bottom active";
+                    break;
+                case "x2" :
+                    className = "right_top__left_bottom active";
+                    break;
+                default :
+                    break;
+            }
+            let lineHtml =  `<div class="bingo_line_box ${className}">
+                                <div class="bingo_line"></div>
+                            </div>`
+            $(bingoHtml).append(lineHtml)
+        }
+        // 下方資訊更新
+        $(".rules").addClass("d-none")
+        $(".result").removeClass("active")
+        $(".rules").removeClass("active")
+        $(".result.complete").addClass("active")
+        
+    } 
+}
 // 開發時檢視圖片用(配合bingo.scss把.img_template的css刪掉才能看到)
 function displayCropImg(src) {
     var html = "<img src='" + src + "' />";
@@ -241,9 +292,8 @@ $(function() {
                     $(`[data-ranking=${Ranking}] .num div`).text(Number); //設定格子正面顯示的數字
                     $(`[data-ranking=${Ranking}] .img_box div`).text(Number); //設定格子反面顯示的數字
                     if (PhotoFilePath !== "") {
-                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",PhotoFilePath); //插入圖片
+                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",`https://211.21.155.101/${PhotoFilePath}`); //插入圖片
                     }
-                    
                     // 依照圖片設定遊戲狀態
                     if (PhotoFilePath !== "") {
                         gameStatus.push(1);
@@ -253,7 +303,7 @@ $(function() {
                 });
                 bingo = initGame(board, gameStatus); // 初始化遊戲
                 bingo.show(); //顯示遊戲
-
+                checkAndDraw()
                 // 有照片的格子翻開
                 var n = 0;
                 $(".bingo_table__item").each(
@@ -398,54 +448,7 @@ $(function() {
             }).then(function (res) {
                 $("body").removeClass("lock")
                 $(".spinner_wrapper").removeClass("active")
-                let checkStatus = bingo.check();
-                // 成功連線
-                if (checkStatus.length > 0) {
-                    console.log(checkStatus)
-                    $(".bingo").attr("style", "pointer-events: none;")
-                    let bingoHtml = $(".bingo")
-                   
-                    for (let i=0; i<checkStatus.length; i++) {
-                        let className = ""
-                        switch (checkStatus[i]) {
-                            case "v0" :
-                                className = "vertical_fst active";
-                                break;
-                            case "v1" :
-                                className = "vertical_snd active";
-                                break;
-                            case "v2" :
-                                className = "vertical_trd active";
-                                break;
-                            case "h0" :
-                                className = "horizontal_fst active";
-                                break;
-                            case "h1" :
-                                className = "horizontal_snd active";
-                                break;
-                            case "h2" :
-                                className = "horizontal_trd active";
-                                break;
-                            case "x1" :
-                                className = "left_top__right_bottom active";
-                                break;
-                            case "x2" :
-                                className = "right_top__left_bottom active";
-                                break;
-                            default :
-                                break;
-                        }
-                        let lineHtml =  `<div class="bingo_line_box ${className}">
-                                            <div class="bingo_line"></div>
-                                        </div>`
-                        $(bingoHtml).append(lineHtml)
-                    }
-                    // 下方資訊更新
-                    $(".result").removeClass("active")
-                    $(".rules").removeClass("active")
-                    $(".result.complete").addClass("active")
-                    
-                } 
+                checkAndDraw()
                 // 清空input(必要，避免上同張圖無法觸發onChange事件)
                 $("#upload_input").val("")
             });
