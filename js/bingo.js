@@ -182,17 +182,17 @@ const blobToFile = function(newBlob, fileName) {
 };
 
 // 開發時檢視圖片用(配合bingo.scss把.img_template的css刪掉才能看到)
-// function displayCropImg(src) {
-//     var html = "<img src='" + src + "' />";
-//     $("#newImg").html(html);
-// }
-// function displayNewImgInfo(src) {
-//     var html = "",
-//     filesize = src.length * 0.75;
-//     html += "<p>裁切圖片尺寸 " + width_crop + "x" + height_crop + "</p>";
-//     html += "<p>檔案大小約 " + Math.round(filesize / 1000) + "k</p>";
-//     $("#newImgInfo").html(html);
-// }
+function displayCropImg(src) {
+    var html = "<img src='" + src + "' />";
+    $("#newImg").html(html);
+}
+function displayNewImgInfo(src) {
+    var html = "",
+    filesize = src.length * 0.75;
+    html += "<p>裁切圖片尺寸 " + width_crop + "x" + height_crop + "</p>";
+    html += "<p>檔案大小約 " + Math.round(filesize / 1000) + "k</p>";
+    $("#newImgInfo").html(html);
+}
 
 
 // ==================== step1 讀取使用者資料/設定遊戲 ====================
@@ -224,12 +224,11 @@ $(function() {
                 memberId: `${memberId}`,
             },
             success: function (res) {
-                let datas = res.data
-                // let datas = res.data.Jiugongge;
-                // let Completion = res.data.Completion;
-                // if (res.data.Completion) {
-                //     location.href="/prize.html"
-                // }_
+                let datas = res.data.Jiugongge;
+                let Completion = res.data.Completion;
+                if (Completion) {
+                    location.href="/prize.html"
+                }
                 var gameStatus = [];
 
                 datas.forEach((data) => {
@@ -237,12 +236,12 @@ $(function() {
                         Id = data.Id,
                         Number = data.Number,
                         PhotoFilePath = data.PhotoFilePath;
-                    $(`[data-ranking=${Ranking}]`).attr("id", `${Id}`); //設定格子Id
-                    $(`[data-ranking=${Ranking}]`).attr("data-number",`${Number}`); //設定格子Id
-                    $(`[data-ranking=${Ranking}] .num div`).text(`${Number}`); //設定格子正面顯示的數字
-                    $(`[data-ranking=${Ranking}] .img_box div`).text(`${Number}`); //設定格子反面顯示的數字
+                    $(`[data-ranking=${Ranking}]`).attr("id", Id); //設定格子Id
+                    $(`[data-ranking=${Ranking}]`).attr("data-number",Number); //設定格子Id
+                    $(`[data-ranking=${Ranking}] .num div`).text(Number); //設定格子正面顯示的數字
+                    $(`[data-ranking=${Ranking}] .img_box div`).text(Number); //設定格子反面顯示的數字
                     if (PhotoFilePath !== "") {
-                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",`https://211.21.155.101/${PhotoFilePath}`); //插入圖片
+                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",PhotoFilePath); //插入圖片
                     }
                     
                     // 依照圖片設定遊戲狀態
@@ -305,7 +304,7 @@ $(function() {
                 width: width_preview,
                 height: height_preview
             },
-            enableZoom: false,
+            // enableZoom: false,
             showZoomer: false
 
         });
@@ -320,11 +319,11 @@ $(function() {
         var width = this.width,
         height = this.height,
         fileSize = Math.round(file.size / 1000)
-        // html = "";
+        html = "";
         
-        // html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
-        // html += "<p>檔案大小約 " + fileSize + "k</p>";
-        // $("#oldImg").before(html);
+        html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
+        html += "<p>檔案大小約 " + fileSize + "k</p>";
+        $("#oldImg").before(html);
     };
     
     $("#crop_img").on("click", function() {
@@ -333,8 +332,8 @@ $(function() {
             format: type_img,
             quality: compress_ratio
         }).then(function(src) {
-            // displayNewImgInfo(src)
-            // displayCropImg(src)
+            displayNewImgInfo(src)
+            displayCropImg(src)
             var data = new FormData();
             // var file = $("#upload_input")[0].files[0]  //原檔測試用
 
@@ -388,7 +387,6 @@ $(function() {
                             break;
 
                         default :
-                            $(".spinner_wrapper").removeClass("active")
                             $("#upload_input").val("")
                             break;
                     }
