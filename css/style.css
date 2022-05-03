@@ -12495,6 +12495,7 @@ main {
   margin: 0 auto;
   background-color: #d7d2c7;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .container {
@@ -13249,6 +13250,10 @@ form.sign_up .col-form-label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.subMenu-content.container {
+  padding: 0;
 }
 
 @-webkit-keyframes turnCard {

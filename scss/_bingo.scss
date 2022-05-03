@@ -464,6 +464,10 @@
         display: flex;
     }
 }
+
+.subMenu-content.container {
+    padding: 0;
+}
 @keyframes turnCard {
     0% {
         transform:  translateY(0px) rotateY(0deg);

@@ -292,7 +292,7 @@ $(function() {
                     $(`[data-ranking=${Ranking}] .num div`).text(Number); //設定格子正面顯示的數字
                     $(`[data-ranking=${Ranking}] .img_box div`).text(Number); //設定格子反面顯示的數字
                     if (PhotoFilePath !== "") {
-                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",`https://211.21.155.101/${PhotoFilePath}`); //插入圖片
+                        $(`[data-ranking=${Ranking}] .img_box img`).attr("src",PhotoFilePath); //插入圖片
                     }
                     // 依照圖片設定遊戲狀態
                     if (PhotoFilePath !== "") {
@@ -460,36 +460,44 @@ $(function() {
 // ==================== step3 監聽分享 ====================
 $(function() {
     $(".line").on("click", function() {
-        // console.log("click")
-        ajax({
-            url: `${API_BASE_URL}/CompleteGame`,
-            type: "POST",
-            data: {
-                memberId: `${memberId}`,
-            },
-            success: function (res) {
-                if (res.statusCode === 0) location.href=`${res.data}` 
-            },
-            error: function (res) {
-                // console.log(res);
-            },
-        })
+        let shareCheck = bingo.check()
+        if (shareCheck.length!==0) {
+             // console.log("click")
+            ajax({
+                url: `${API_BASE_URL}/CompleteGame`,
+                type: "POST",
+                data: {
+                    memberId: `${memberId}`,
+                },
+                success: function (res) {
+                    if (res.statusCode === 0) location.href=`Completion` 
+                },
+                error: function (res) {
+                    // console.log(res);
+                },
+            })
+        }
+       
     })
     $(".download").on("click", function() {
-        // console.log("click")
-        ajax({
-            url: `${API_BASE_URL}/CompleteGame`,
-            type: "POST",
-            data: {
-                memberId: `${memberId}`,
-            },
-            success: function (res) {
-                if (res.statusCode === 0) location.href=`${res.data}`         
-            },
-            error: function (res) {
-                // console.log(res);
-            },
-        })
+        let shareCheck = bingo.check()
+        if (shareCheck.length!==0) {
+            // console.log("click")
+           ajax({
+               url: `${API_BASE_URL}/CompleteGame`,
+               type: "POST",
+               data: {
+                   memberId: `${memberId}`,
+               },
+               success: function (res) {
+                   if (res.statusCode === 0) location.href=`Completion`
+                   console.log(res.data) 
+               },
+               error: function (res) {
+                   // console.log(res);
+               },
+           })
+       }
     })  
     $(".facebook").on("click", function() {
         FB.ui(
@@ -499,7 +507,8 @@ $(function() {
             },
             // callback
             function(response) {
-                if (response && !response.error_message) {
+                let shareCheck = bingo.check()
+                if (response && !response.error_message && shareCheck.length!==0) {
                     alert('Posting completed.');
                     ajax({
                         url: `${API_BASE_URL}/CompleteGame`,
@@ -508,7 +517,7 @@ $(function() {
                             memberId: `${memberId}`,
                         },
                         success: function (res) {
-                            if (res.statusCode === 0) location.href=`${res.data}`
+                            if (res.statusCode === 0) location.href=`Completion` 
                         },
                         error: function (res) {
                             // console.log(res);
