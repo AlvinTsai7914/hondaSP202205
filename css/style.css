@@ -12713,8 +12713,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: left;
@@ -12729,8 +12729,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: left;
@@ -12745,8 +12745,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: left;
@@ -12763,8 +12763,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: right;
@@ -12780,8 +12780,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: right;
@@ -12798,8 +12798,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: right;
@@ -12816,8 +12816,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: left;
@@ -12834,8 +12834,8 @@ form.sign_up .col-form-label {
           animation-name: drawLine;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: right;
@@ -13174,7 +13174,7 @@ form.sign_up .col-form-label {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.upload p {
+.upload h2 {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -13183,10 +13183,17 @@ form.sign_up .col-form-label {
   letter-spacing: 5px;
   color: #d83943;
   display: block;
+  margin-bottom: 20px;
 }
-.upload p span {
+.upload h2 span {
   font-size: 48px;
   margin: 0 8px;
+}
+.upload h3 {
+  color: #333333;
+  letter-spacing: 4px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 .upload .btn {
   display: block;
@@ -13252,7 +13259,10 @@ form.sign_up .col-form-label {
   display: flex;
 }
 
-.subMenu-content.container {
+header .owner .owner-btn a {
+  display: inline-block;
+}
+header .subMenu-content.container {
   padding: 0;
 }
 

@@ -8,7 +8,7 @@
 @mixin animateDrawLine($o:left) {
     animation-name: drawLine;
     animation-duration: 1s;
-    animation-delay: 1.5s;
+    animation-delay: 3s;
     animation-fill-mode: both;
     transform-origin: $o;
 }
@@ -388,19 +388,25 @@
         align-items: center;
         justify-content: center;
     }
-    p {
+    h2 {
         width: fit-content;
         font-size: 28px;
         font-weight: bold;
         letter-spacing: 5px;
         color: $primary;
         display: block;
+        margin-bottom: 20px;
         span {
             font-size: 48px;
             margin: 0 8px;
         }
     }
-
+    h3 {
+        color: #333333; 
+        letter-spacing: 4px; 
+        font-size: 20px; 
+        margin-bottom: 15px;
+    }
     .btn {
         display: block;
         &.select {
@@ -432,15 +438,12 @@
                 width: 270px;
                 height: 82px;
             }
-
         }
     }
 
     img {
         max-width: 90%;
-    }
-
-    
+    }    
 }
 .img_template {
     position: fixed;
@@ -464,10 +467,15 @@
         display: flex;
     }
 }
-
-.subMenu-content.container {
-    padding: 0;
+header {
+    .owner .owner-btn a {
+        display: inline-block;
+    }
+    .subMenu-content.container {
+        padding: 0;
+    }
 }
+
 @keyframes turnCard {
     0% {
         transform:  translateY(0px) rotateY(0deg);

@@ -5,15 +5,18 @@ var bingo;
 var board = 3; //3*3的遊戲
 var lastUploadImage;
 
-// 壓縮圖片設定參數
-var compressRatio = 0.8, // 圖片壓縮比例
-    imgNewWidth = 1080, // 圖片新寬度
-    img = new Image(),
-    canvas = document.createElement("canvas"),
-    context = canvas.getContext("2d"),
-    file, 
-    fileReader, 
-    dataUrl;
+// croppie 設定參數
+var width_crop = 1080, // 圖片裁切寬度 px 值
+    height_crop = 1350, // 圖片裁切高度 px 值
+    type_crop = "square", // 裁切形狀: square 為方形, circle 為圓形
+    width_preview = 1080, // 預覽區塊寬度 px 值
+    height_preview = 1350, // 預覽區塊高度 px 值
+    compress_ratio = 0.8, // 圖片壓縮比例 0~1
+    type_img = "jpeg", // 圖檔格式 jpeg png webp
+    oldImg = new Image(),
+    myCrop,
+    file,
+    oldImgDataUrl;
 
 
 // 遊戲設定
@@ -326,6 +329,8 @@ $(function() {
 // ==================== step2 使用者上傳圖片 ====================
 $(function() {
     $(".bingo_table__item").on("click", function () {
+        // $(".bingo").attr("style", "pointer-events: none;")
+        // $(".btn.select").attr("style", "pointer-events: auto;")
         if (!$(this).hasClass("active")) {
             selectedNumber = $(this).data("number");
             $(".selected_number").text(selectedNumber);
@@ -334,63 +339,65 @@ $(function() {
     });
     
     $("#upload_input").on("change", function() {
-        $(".spinner_wrapper").addClass("active")
-        $("body").addClass("lock")
-        file = this.files[0];
-        // 圖片才處理
-        if (file && file.type.indexOf("image") == 0) {
-            fileReader = new FileReader();
-            fileReader.onload = getFileInfo;
-            fileReader.readAsDataURL(file);
-        }
+        // $(".spinner_wrapper").addClass("active")
+        // $("body").addClass("lock")
+        $("#oldImg").croppie('destroy');
+
+        // 裁切初始參數設定
+        myCrop = $("#oldImg").croppie({
+            viewport: { // 裁切區塊
+                width: width_crop,
+                height: height_crop,
+                type: type_crop
+            },
+            boundary: { // 預覽區塊
+                width: width_preview,
+                height: height_preview
+            },
+            // enableZoom: false,
+            showZoomer: false
+
+        });
+        $("#oldImg").show();
+        readFile(this);
+        setTimeout(() => {
+            $("#crop_img").trigger("click")
+        }, 2000)
     });
-    function getFileInfo(evt) {
-        dataUrl = evt.target.result,
-        // 取得圖片
-        img.src = dataUrl;
-    }
-        
-    // 圖片載入後
-    img.onload = function() {
-        var width = this.width, // 圖片原始寬度
-            height = this.height, // 圖片原始高度
-            imgNewHeight = imgNewWidth * height / width, // 圖片新高度
-            html = "",
-            newImg;
-        
-        // 顯示預覽圖片
-        html += "<img src='" + dataUrl + "'/>";
-        html += "<p>這裡是原始圖片尺寸 " + width + "x" + height + "</p>";
-        html += "<p>檔案大小約 " + Math.round(file.size / 1000) + "k</p>";
-        $("#oldImg").html(html);
-        
-        // 使用 canvas 調整圖片寬高
-        canvas.width = imgNewWidth;
-        canvas.height = imgNewHeight;
-        context.clearRect(0, 0, imgNewWidth, imgNewHeight);
-        
-        // 調整圖片尺寸
-        context.drawImage(img, 0, 0, imgNewWidth, imgNewHeight);
-        
-        // 顯示新圖片
-        newImg = canvas.toDataURL("image/jpeg", compressRatio);
+    
+    oldImg.onload = function() {
+        var width = this.width,
+        height = this.height,
+        fileSize = Math.round(file.size / 1000)
         html = "";
-        html += "<img src='" + newImg + "'/>";
-        html += "<p>這裡是新圖片尺寸 " + imgNewWidth + "x" + imgNewHeight + "</p>";
-        html += "<p>檔案大小約 " + Math.round(0.75 * newImg.length / 1000) + "k</p>"; // 出處 https://stackoverflow.com/questions/18557497/how-to-get-html5-canvas-todataurl-file-size-in-javascript
-        $("#newImg").html(html);
         
-        lastUploadImage = newImg
-        // canvas 轉換為 blob 格式、上傳
-        canvas.toBlob(function(blob) {
-            let file = new File([blob], "fileName.jpg", { type: "image/jpeg" })
+        html += "<p>原始圖片尺寸 " + width + "x" + height + "</p>";
+        html += "<p>檔案大小約 " + fileSize + "k</p>";
+        $("#oldImg").before(html);
+    };
+    
+    $("#crop_img").on("click", function() {
+        myCrop.croppie("result", {
+            type: "canvas",
+            format: type_img,
+            quality: compress_ratio
+        }).then(function(src) {
+            displayNewImgInfo(src)
+            displayCropImg(src)
             var data = new FormData();
             // var file = $("#upload_input")[0].files[0]  //原檔測試用
+
+            // 壓縮後轉檔
+            var blob = base64ToBlob(src)    //Base64 > blob
+            var file = blobToFile(blob, "cropImg.jpg")  // blob > file
             data.append("memberId", memberId);
             data.append("number", selectedNumber);
             data.append("photo", file);
+            
+            lastUploadImage = src
+            // console.log(src)
             // ===== 上傳圖片API =====
-                ajax({
+            ajax({
                 url: `${API_BASE_URL}/UploadPhoto`,
                 type: "POST",
                 data: data,
@@ -426,7 +433,7 @@ $(function() {
                             $(".result.active").removeClass("active")
                             $(".rules").addClass("d-none")
                             $(".result.failed").addClass("active")
-                            
+                         
                             break;
 
                         default :
@@ -445,10 +452,9 @@ $(function() {
                 // 清空input(必要，避免上同張圖無法觸發onChange事件)
                 $("#upload_input").val("")
             });
-        }, "image/jpeg", compressRatio);
-    };
-    
-
+        });
+   
+    });
 });
 
 // ==================== step3 監聽分享 ====================

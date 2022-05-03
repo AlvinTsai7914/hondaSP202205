@@ -182,15 +182,14 @@
                 </div>
 
                 <!-- 完成遊戲 -->
-                <div class="result complete">
+                <div class="result complete active">
                     <h2>挑戰成功！</h2>
                     <p>完成Honda停車九宮格的你是最棒的！<br>
                         趕快向好友分享就可以獲得<br>
                         全台嘟嘟房 1hr 停車券哦！</p>
                     <div class="share_links">
-                        <a class="download" href="/img/share.png" download="share.png" download></a>
-                        <!-- <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-env="REAL" data-url="https://www.honda-taiwan.com.tw/SP/202205/" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div> -->
-                        <!-- <div class="line line-it-button" data-lang="zh_Hant" data-type="share-c" data-env="REAL" data-url="https://www.honda-taiwan.com.tw/SP/202205/" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div> -->
+                        <!-- 20220503 修改下載圖檔 -->
+                        <a class="download" href="/img/share.jpg" downloa="share.jpg"></a>
                         <a class="line" href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent("https://www.honda-taiwan.com.tw/SP/202205/")) ));' title='分享給 LINE 好友'></a>
                         <div class="facebook">
                             <img src="img/icon/facebook.png" alt="">
@@ -202,11 +201,13 @@
             <!-- 上傳照片 START -->
             <div class="upload">
                 <div class="container" >
-                    <p>你已選取<span class="selected_number">9</span>號</p>
+                    <h2>你已選取<span class="selected_number">9</span>號</h2>
                     <!-- <form enctype="multipart/form-data"> -->
                         <label class="btn select" id="upload_label"><input id="upload_input" style="display:none;" type="file" accept="image/*"></label>
                     <!-- </form> -->
                     <button id="crop_img" style="opacity: 0;">123</button>
+                    <!-- 20220503 新增文字 -->
+                    <h3 class="subtit" style="">示範照片</h3>
                     <img src="img/sample.png" alt="">
                 </div>
             </div>
