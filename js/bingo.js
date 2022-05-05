@@ -325,8 +325,29 @@ $(function() {
 
 // ==================== step2 使用者上傳圖片 ====================
 $(function() {
+
+    function clickOrScroll() {
+        if(touchStartY!==touchMoveY) {
+            return false;
+        }else{
+            return true
+        }
+    };
+    let touchStartY,
+        touchMoveY;
+    $(".bingo_table__item").on("touchstart", function (e) {
+        touchStartY = e.touches[0].clientY;
+        touchMoveY = e.touches[0].clientY;
+        // console.log("touchStartY : " + touchStartY)
+    });
+    $(".bingo_table__item").on("touchmove", function (e) {
+        touchMoveY = e.touches[0].clientY;
+        // console.log("touchMoveY : " + touchMoveY)
+    });
+    // 桌機
     $(".bingo_table__item").on("click", function () {
-        if (!$(this).hasClass("active")) {
+  
+        if (!$(this).hasClass("active") && clickOrScroll()) {
             selectedNumber = $(this).data("number");
             $(".selected_number").text(selectedNumber);
             $(".upload").addClass("active");
@@ -493,6 +514,7 @@ $(function() {
     //        })
     //    }
     // })  
+    // 20220504 修改網頁版分享報錯
     $(".facebook").on("click", function() {
         FB.ui(
             {
@@ -501,9 +523,29 @@ $(function() {
             },
             // callback
             function(response) {
-                let shareCheck = bingo.check()
-                if (response && !response.error_message && shareCheck.length!==0) {
-                    alert('Posting completed.');
+                let shareCheck = bingo.check()           
+                if (shareCheck.length!==0) {
+                    alert('分享成功!');
+                    // 20220504 更換 活動沒有用fb登入api，導致分享會報錯無法完成遊戲
+                    // if (response && !response.error_message && shareCheck.length!==0) {
+                    //     alert('分享成功!');
+                    //     ajax({
+                    //         url: `${API_BASE_URL}/CompleteGame`,
+                    //         type: "POST",
+                    //         data: {
+                    //             memberId: `${memberId}`,
+                    //         },
+                    //         success: function (res) {
+                    //             if (res.statusCode === 0) location.href=`Completion` 
+                    //         },
+                    //         error: function (res) {
+                    //             // console.log(res);
+                    //         },
+                    //     })
+                    // } else {
+                    //     alert('分享失敗，請重新點選分享按鈕');
+                    // }
+                    // 換成只要點按鈕call分享api就算成功
                     ajax({
                         url: `${API_BASE_URL}/CompleteGame`,
                         type: "POST",
@@ -517,10 +559,10 @@ $(function() {
                             // console.log(res);
                         },
                     })
-                } else {
-                    alert('分享失敗，請重新點選分享按鈕');
                 }
             }
         );  
     })
 })
+
+

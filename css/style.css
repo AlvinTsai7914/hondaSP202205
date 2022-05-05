@@ -12486,7 +12486,7 @@ header .logo img {
     height: 60px;
   }
   header .logo {
-    max-width: 120px;
+    max-width: 140px;
   }
 }
 
@@ -12537,7 +12537,7 @@ main {
 }
 .tab_btns .btn {
   width: 100%;
-  padding: 0 6px;
+  padding: 2px 6px;
   border-radius: 0px;
   border: 1px solid #333333;
   background-color: white;
@@ -12546,6 +12546,7 @@ main {
 }
 .tab_btns .btn p {
   font-size: 30px;
+  letter-spacing: 3px;
   font-weight: bold;
   font-family: "Noto Sans Hant";
   text-align: center;
@@ -12561,7 +12562,7 @@ main {
     margin-bottom: 15px;
   }
   .tab_btns .btn p {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 
@@ -12626,33 +12627,36 @@ form.sign_up .col-form-label {
 .form_btn button {
   font-size: 24px;
   font-weight: bold;
-  width: 100%;
-  max-width: 220px;
-  padding: 6px 24px;
+  text-align: start;
+  width: 200px;
+  padding: 2px 30px;
   background-color: #ffffff;
   border: 1px solid #333333;
   border-radius: 0px;
-  display: inline-block;
+  display: block;
   position: relative;
 }
 .form_btn button::after {
   content: "";
-  width: 36px;
+  width: 26px;
   height: 20px;
-  background: center/contain no-repeat url(../img/submit_arrow.svg);
+  background: center/contain no-repeat url(../img/icon/submit_arrow.png);
   position: absolute;
   top: 50%;
-  left: 70%;
+  left: 72%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
 @media (max-width: 768px) {
   .form_btn button {
-    padding: 6px 6px;
-    font-size: 18px;
+    padding: 2px 18px 4px 18px;
+    font-size: 17px;
+    width: 130px;
+    min-width: 130px;
+    max-width: none;
   }
   .form_btn button::after {
-    width: 28px;
+    width: 22px;
     height: 20px;
   }
 }
@@ -12980,22 +12984,22 @@ form.sign_up .col-form-label {
 }
 @media (max-width: 768px) {
   .rules h2 {
-    font-size: 28px;
+    font-size: 24px;
   }
   .rules p {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.5;
   }
   .rules .steps {
     padding: 0 40px;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
   }
   .rules .steps div {
     position: relative;
     border-radius: 18px;
     background-color: white;
-    padding: 6px 10px 6px 75px;
+    padding: 6px 10px 6px 70px;
     margin-bottom: 15px;
   }
   .rules .steps .step_one::before {
@@ -13069,6 +13073,8 @@ form.sign_up .col-form-label {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   padding: 15px;
+  max-width: 380px;
+  margin: 0 auto;
 }
 .result.complete .share_links .download {
   width: 80px;
@@ -13138,8 +13144,14 @@ form.sign_up .col-form-label {
     font-size: 36px;
   }
   .result p {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.6;
     text-align: center;
+  }
+}
+@media all and (max-width: 576px) {
+  .result.complete .share_links {
+    max-width: 230px;
   }
 }
 
@@ -13147,7 +13159,6 @@ form.sign_up .col-form-label {
   width: 100%;
   height: 100%;
   padding-top: 60%;
-  border-top: 1px solid #767676;
   position: absolute;
   top: 100%;
   left: 0;
@@ -13158,6 +13169,30 @@ form.sign_up .col-form-label {
 }
 .upload.active {
   top: 0%;
+}
+.upload .back {
+  width: 60px;
+  height: 40px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e2ddd2), to(#aba6a1));
+  background: linear-gradient(to bottom, #e2ddd2 0%, #aba6a1 100%);
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  border-radius: 6px;
+  border-top: 3px solid #c0bbb0;
+  border-right: 3px solid #c0bbb0;
+  border-left: 3px solid #c0bbb0;
+  border-bottom: 3px solid #c0bbb0;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+.upload .back i {
+  font-size: 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 .upload .container {
   display: -webkit-box;
@@ -13173,6 +13208,7 @@ form.sign_up .col-form-label {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
 }
 .upload h2 {
   width: -webkit-fit-content;
@@ -13192,7 +13228,7 @@ form.sign_up .col-form-label {
 .upload h3 {
   color: #333333;
   letter-spacing: 4px;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 15px;
 }
 .upload .btn {
@@ -13212,7 +13248,16 @@ form.sign_up .col-form-label {
   cursor: pointer;
   background: center/100% no-repeat url("../img/img_submit_btn.png");
 }
+.upload img {
+  max-width: 90%;
+}
 @media all and (max-width: 768px) {
+  .upload h2 {
+    font-size: 24px;
+  }
+  .upload h2 span {
+    font-size: 40px;
+  }
   .upload .btn.select {
     width: 300px;
     height: 82px;
@@ -13220,15 +13265,46 @@ form.sign_up .col-form-label {
   .upload .btn.submit {
     width: 150px;
   }
+  .upload .back {
+    width: 50px;
+    height: 36px;
+    border-radius: 6px;
+    border-top: 2px solid #c0bbb0;
+    border-right: 2px solid #c0bbb0;
+    border-left: 2px solid #c0bbb0;
+    border-bottom: 2px solid #c0bbb0;
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  }
+  .upload .back i {
+    font-size: 24px;
+  }
 }
 @media all and (max-width: 576px) {
+  .upload h2 {
+    font-size: 22px;
+  }
+  .upload h2 span {
+    font-size: 36px;
+  }
   .upload .btn.select {
     width: 270px;
     height: 82px;
   }
-}
-.upload img {
-  max-width: 90%;
+  .upload .back {
+    width: 36px;
+    height: 28px;
+    border-radius: 6px;
+    border-top: 2px solid #c0bbb0;
+    border-right: 2px solid #c0bbb0;
+    border-left: 2px solid #c0bbb0;
+    border-bottom: 2px solid #c0bbb0;
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  }
+  .upload .back i {
+    font-size: 18px;
+  }
 }
 
 .img_template {
@@ -13257,13 +13333,6 @@ form.sign_up .col-form-label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-header .owner .owner-btn a {
-  display: inline-block;
-}
-header .subMenu-content.container {
-  padding: 0;
 }
 
 @-webkit-keyframes turnCard {
@@ -13339,39 +13408,43 @@ p.super_big_red {
   line-height: 1.3;
   color: #d83943;
   font-weight: bold;
-  font-family: "Poppins";
+  font-family: "Poppins", "Noto sans TC", "roboto";
+  margin: 6px 0;
 }
 p.big_red {
-  font-size: 55px;
-  line-height: 1.8;
+  font-size: 54px;
+  line-height: 1;
   color: #d83943;
   font-weight: bold;
-  font-family: "Poppins";
+  font-family: "Poppins", "Noto sans TC", "roboto";
+  margin: 16px 0;
 }
 p.bold {
   font-size: 24px;
   font-weight: bold;
+  line-height: 1;
+  margin: 4px 0;
 }
 p.red {
   color: #d83943;
 }
 @media all and (max-width: 768px) {
   p.default {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
   }
   p.super_big_red {
-    font-size: 76px;
+    font-size: 68px;
     line-height: 1.2;
     color: #d83943;
     font-weight: bold;
     font-family: "Poppins";
   }
   p.big_red {
-    font-size: 36px;
+    font-size: 42px;
   }
   p.bold {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
@@ -13386,9 +13459,10 @@ p.red {
   margin-bottom: 20px;
 }
 .general_prize h1 {
-  font-size: 36px;
+  font-size: 34px;
   margin-bottom: 15px;
   font-weight: bold;
+  letter-spacing: 4px;
 }
 .general_prize a {
   width: 100%;
@@ -13400,8 +13474,8 @@ p.red {
   background-color: white;
   border: 1px solid #333333;
   text-decoration: none;
-  -webkit-filter: drop-shadow(2.237px 3.316px 0px rgba(40, 39, 35, 0.73));
-          filter: drop-shadow(2.237px 3.316px 0px rgba(40, 39, 35, 0.73));
+  -webkit-filter: drop-shadow(2px 2px 0px rgba(40, 39, 35, 0.73));
+          filter: drop-shadow(2px 2px 0px rgba(40, 39, 35, 0.73));
 }
 @media all and (min-width: 768px) {
   .general_prize a:hover {
@@ -13414,7 +13488,7 @@ p.red {
   }
   .general_prize a {
     max-width: 270px;
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -13452,13 +13526,13 @@ p.red {
 .qrcode {
   width: 100%;
   height: 100%;
-  padding-top: 55%;
+  padding-top: 140px;
   border-top: 1px solid #767676;
   position: absolute;
   top: 100%;
   left: 0;
   background: #d7d2c7;
-  z-index: 10;
+  z-index: 20;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
   color: #333333;
@@ -13470,7 +13544,7 @@ p.red {
 .qrcode h1 {
   font-size: 40px;
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 .qrcode h2 {
   font-size: 24px;
@@ -13479,28 +13553,66 @@ p.red {
   width: -moz-fit-content;
   width: fit-content;
   border: 1px solid #333333;
-  margin: 0 auto 15px;
+  margin: 0 auto 50px;
   padding: 6px;
 }
 .qrcode p {
   font-size: 28px;
   display: block;
 }
-.qrcode img {
-  margin: 0 auto 15px;
+.qrcode .container .img_box {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 50px;
+}
+.qrcode .container .img_box img {
+  width: 100%;
 }
 @media all and (max-width: 768px) {
   .qrcode {
-    padding-top: 65%;
+    padding-top: 100px;
   }
   .qrcode h1 {
-    font-size: 28px;
+    font-size: 26px;
   }
   .qrcode h2 {
     font-size: 18px;
+    margin-bottom: 50px;
   }
   .qrcode p {
-    font-size: 22px;
+    font-size: 20px;
   }
+}
+
+.parking_code {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.parking_code h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.parking_code .img_box {
+  width: 100%;
+  max-width: 430px;
+  margin-bottom: 30px;
+}
+.parking_code .img_box img {
+  width: 100%;
+}
+.parking_code p {
+  font-size: 16px;
+}
+.parking_code a {
+  display: inline;
 }
 /*# sourceMappingURL=style.css.map */

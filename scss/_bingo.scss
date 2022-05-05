@@ -232,21 +232,21 @@
     }
     @media (max-width: 768px) {
         h2 {
-            font-size: 28px;
+            font-size: 24px;
         } 
         p {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.5;
         }
         .steps {
             padding: 0 40px;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.5;
             div {
                 position: relative;
                 border-radius: 18px;
                 background-color: white;
-                padding: 6px 10px 6px 75px;
+                padding: 6px 10px 6px 70px;
                 margin-bottom: 15px;
             }
             .step_one::before {
@@ -326,6 +326,8 @@
             align-items: center;
             justify-content: space-around;
             padding: 15px;
+            max-width: 380px;
+            margin: 0 auto;
             .download {
                 @include sharelinkStyle;
                 background: center / contain no-repeat url('../img/icon/download.png');
@@ -361,8 +363,14 @@
             }
         }
         p {
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1.6;
             text-align: center;
+        }
+    }
+    @media all and (max-width: 576px) {
+        &.complete .share_links {
+            max-width: 230px;
         }
     }
 }
@@ -371,22 +379,42 @@
     width: 100%;
     height: 100%;
     padding-top: 60%;
-    border-top: 1px solid #767676;
     position: absolute;
     top: 100%;
     left: 0;
     background: #d7d2c7;
     z-index: 10;
     transition: 0.5s ease;
-
     &.active {
         top: 0%;
+    }
+    .back {
+        width: 60px;
+        height: 40px;
+        background: linear-gradient(to bottom, #e2ddd2 0%, #aba6a1 100%);
+        position: absolute;
+        top: 0px;
+        left: 20px;
+        border-radius: 6px;
+        border-top: 3px solid #c0bbb0; 
+        border-right: 3px solid #c0bbb0; 
+        border-left: 3px solid #c0bbb0; 
+        border-bottom: 3px solid #c0bbb0; 
+        box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 50%);
+        i {
+            font-size: 28px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
     .container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
     h2 {
         width: fit-content;
@@ -404,7 +432,7 @@
     h3 {
         color: #333333; 
         letter-spacing: 4px; 
-        font-size: 20px; 
+        font-size: 18px; 
         margin-bottom: 15px;
     }
     .btn {
@@ -424,7 +452,20 @@
             cursor: pointer;
             background: center / 100% no-repeat url('../img/img_submit_btn.png');
         }
-        @media all and (max-width: 768px) {
+
+    }
+
+    img {
+        max-width: 90%;
+    }    
+    @media all and (max-width: 768px) {
+        h2 {
+            font-size: 24px;
+            span {
+                font-size: 40px;
+            }
+        }
+        .btn {
             &.select {
                 width: 300px;
                 height: 82px;
@@ -433,17 +474,49 @@
                 width: 150px;
             }
         }
-        @media all and (max-width: 576px) {
+        .back {
+            width: 50px;
+            height: 36px;
+            border-radius: 6px;
+            border-top: 2px solid #c0bbb0; 
+            border-right: 2px solid #c0bbb0; 
+            border-left: 2px solid #c0bbb0; 
+            border-bottom: 2px solid #c0bbb0; 
+            box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 50%);
+            i {
+                font-size: 24px;
+            }
+        }
+ 
+    }
+    @media all and (max-width: 576px) {
+        h2 {
+            font-size: 22px;
+            span {
+                font-size: 36px;
+            }
+        }
+        .btn {
             &.select {
                 width: 270px;
                 height: 82px;
             }
         }
+        .back {
+            width: 36px;
+            height: 28px;
+            border-radius: 6px;
+            border-top: 2px solid #c0bbb0; 
+            border-right: 2px solid #c0bbb0; 
+            border-left: 2px solid #c0bbb0; 
+            border-bottom: 2px solid #c0bbb0; 
+            box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 50%);
+            i {
+                font-size: 18px;
+            }
+        }
+   
     }
-
-    img {
-        max-width: 90%;
-    }    
 }
 .img_template {
     position: fixed;
@@ -465,14 +538,6 @@
     pointer-events: none;
     &.active {
         display: flex;
-    }
-}
-header {
-    .owner .owner-btn a {
-        display: inline-block;
-    }
-    .subMenu-content.container {
-        padding: 0;
     }
 }
 

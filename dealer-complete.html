@@ -9,24 +9,117 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- 取消 safari 電話連結 -->
     <meta name="format-detection" content="telephone=no">
-    
-    <!-- facebook share -->
-    <meta property="og:url"           content="https://www.ks-design.com.tw/" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
-    
-    <title>好車停不停 | 遊戲頁</title>
-    <!-- favicon -->
-    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
-    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.honda-taiwan.com.tw/SP/202205/Login">
+    <meta property="og:title" content="解鎖Honda停車九宮格，領取限量停車券">
+    <meta property="og:description" content="今年夏天，讓全台停車場都是你的遊樂場！">
+    <meta property="og:image" content="https://www.honda-taiwan.com.tw/SP/2022_05/img/index/SP_2022may_M_01.jpg">
 
-    </head>
+    <title>好車停不停 | 經銷商</title>
 
+    <!-- favicon.ico -->
+    <link rel="icon" href="~/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <link rel="Bookmark" href="~/images/favicon.ico">
+
+    <!-- 本頁的 Css -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+    <link rel="stylesheet" type="text/css" media="all" href="~/SP/2022_05/css/croppie.css?v=@(v)" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css?v=@(v)" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" media="all" href="~/SP/2022_05/css/style.css?v=@(v)" />
+
+    <style>
+        .LoadModal {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+            display: none;
+        }
+
+        .LoadCenter {
+            z-index: 1000;
+            margin: 300px auto;
+            padding: 10px;
+            width: 130px;
+            background-color: White;
+            border-radius: 10px;
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -moz-opacity: 1;
+        }
+
+        .field-validation-error {
+            display: block;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 80%;
+            color: #dc3545;
+        }
+    </style>
+
+    <!-- 這裡是各家的媒體追蹤 code 開始 -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M4RTL8Z');</script>
+    <!-- End Google Tag Manager -->
+    <!--
+        Start of global snippet: Please do not remove
+        Place this snippet between the <head> and </head> tags on every page of your site.
+        -->
+    <!-- Global site tag (gtag.js) - Google Marketing Platform -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=DC-5417154"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=DC-8248039"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'DC-5417154');
+        gtag('config', 'DC-8248039');
+        gtag('config', 'AW-940481730');
+    </script>
+    <!-- End of global snippet: Please do not remove -->
+    <!--
+    Event snippet for P01.Offical.AllLandings on : Please do not remove.
+    Place this snippet on pages with events you’re tracking.
+    Creation date: 01/21/2020
+    -->
+    <script>
+        gtag('event', 'conversion', {
+            'allow_custom_scripts': true,
+            'send_to': 'DC-5417154/invmedia/p01of0+standard'
+        });
+    </script>
+    <noscript>
+        <img src="https://ad.doubleclick.net/ddm/activity/src=5417154;type=invmedia;cat=p01of0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;ord=1?" width="1" height="1" alt="" />
+    </noscript>
+    <script>
+        gtag('event', 'conversion', {
+            'allow_custom_scripts': true,
+            'send_to': 'DC-8248039/amnet000/honda0+standard'
+        });
+    </script>
+    <noscript>
+        <img src="https://ad.doubleclick.net/ddm/activity/src=8248039;type=amnet000;cat=honda0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;ord=1?" width="1" height="1" alt="" />
+    </noscript>
+    <!-- End of event snippet: Please do not remove -->
+    <!-- 這裡是各家的媒體追蹤 code 結束 -->
+</head>
 <body>
 
     <!-- wrapper start -->

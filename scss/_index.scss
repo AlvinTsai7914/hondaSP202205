@@ -8,13 +8,14 @@
     }
     .btn {
         width: 100%;
-        padding: 0 6px;
+        padding: 2px 6px;
         border-radius: 0px;
         border: 1px solid #333333;
         background-color: white;
         transform:  skewX(-30deg);
         p {
             font-size: 30px;
+            letter-spacing: 3px;
             font-weight: bold;
             font-family: "Noto Sans Hant";
             text-align: center;
@@ -28,7 +29,7 @@
     @media (max-width: 768px) {
         margin-bottom: 15px;
         .btn p {
-            font-size: 22px;
+            font-size: 18px;
         }   
 
     }
@@ -75,34 +76,35 @@ form.sign_up {
     button {
         font-size: 24px;
         font-weight: bold;
-        width: 100%;
-        max-width: 220px;
-        padding: 6px 24px;
+        text-align: start;
+        width: 200px;
+        padding: 2px 30px;
         background-color: #ffffff;
         border: 1px solid #333333;
         border-radius: 0px;
-        display: inline-block;
+        display: block;
         position: relative;
         // filter: drop-shadow(1.118px 1.658px 8px rgba(130,123,114,0.91));
         &::after {
             content: "";
-            width: 36px;
+            width: 26px;
             height: 20px;
-            background: center / contain no-repeat url(../img/submit_arrow.svg);
+            background: center / contain no-repeat url(../img/icon/submit_arrow.png);
             position: absolute;
             top: 50%;
-            left: 70%;
+            left: 72%;
             transform: translateY(-50%);
         }
     }
     @media (max-width: 768px) {
         button {
-            padding: 6px 6px;
-            font-size: 18px;
-        }
-        button {
+            padding: 2px 18px 4px 18px ;
+            font-size: 17px;
+            width: 130px;
+            min-width: 130px;
+            max-width: none;
             &::after {
-                width: 28px;
+                width: 22px;
                 height: 20px;
             }
         }
